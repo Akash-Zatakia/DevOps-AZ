@@ -1,0 +1,29 @@
+# aws-sandbox.yml
+
+---
+    - hosts: local
+      vars:
+        instance_ids:
+            -   'instance id'
+            
+        region: us-east-1 
+        profile: #profile name
+      tasks:
+        - name: Start Instances
+          ec2:
+            instance id: '{{ instance_ids}}'
+            region: '{{ region }}'
+            profile: '{{ profile }}'
+            state: running
+            wait: true
+          tags:
+            - start
+        - name: Stop Instances
+          ec2:
+            instance id: '{{ instance_ids}}'
+            region: '{{ region }}'
+            profile: '{{ profile }}'
+            state: stopped
+            wait: true
+          tags:
+            - stop
